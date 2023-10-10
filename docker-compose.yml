@@ -28,9 +28,9 @@ services:
     ports:
       - "9000:9000"
     links:
-      - app-mysql
+      - app-mariadb
     depends_on:
-      - app-mysql   
+      - app-mariadb   
 
   app-web:
     container_name: app-web
@@ -45,15 +45,15 @@ services:
     depends_on:
       - app-api
 
-  app-mysql:
-    container_name: app-mysql
+  app-mariadb:
+    container_name: app-mariadb
     restart: unless-stopped
-    image: cytopia/mariadb-5.5
+    image: mariadb:10.3.31
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: Admin123!@
+      MARIADB_DATABASE : laravel
+      MARIADB_ROOT_PASSWORD: Admin123!@
     volumes:
-      - "./mysql:/var/lib/mysql"
+      - "./mariadb:/var/lib/mysql"
     ports:
       - "3306:3306"
     
